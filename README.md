@@ -22,7 +22,7 @@ This project has a goal to get knowledge about multhithreding and multiprocessin
 4. time_to_sleep: is in milliseconds and is the time the philosopher will spend sleeping
 5. number_of_times_each_philosopher_must_eat: argument is optional, if all philosophers eat at least ’number_of_times_each_philosopher_must_eat’ the simulation will stop. If not specified, the simulation will stop only at the death of a philosopher.
 
-#Source
+# Source
 
 * https://youtu.be/6j4lwImwyT8
 * https://youtu.be/2sv8LB0_uKg
