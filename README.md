@@ -7,9 +7,9 @@ Five silent philosophers sit at a round table with bowls of spaghetti. Forks are
 This project has a goal to get knowledge about multhithreding and multiprocessing and related problems with data manipulation.
 
 
-Philo - multithreading and mutex;
+>Philo - multithreading and mutex;
 
-Philo_bonus - multiprocessing and semaphore.
+>Philo_bonus - multiprocessing and semaphore.
 
 # Parameters
 
