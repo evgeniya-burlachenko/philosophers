@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/08 22:45:24 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/08 23:47:28 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	simulate (t_philo *philo)
 {
 	int		i;
 	t_one	*one;
-	int	countt;
+	int	count;
 	
 	i = -1;
 	one = philo->one;
@@ -111,13 +111,13 @@ int	simulate (t_philo *philo)
 		if (philo->count_eat != -1 && philo->all_alive)
 		{
 			i = -1;
-			countt = 0;
+			count = 0;
 			while (++i < philo->nbr)
 			{
 				if (one[i].count >= philo->count_eat)
-				countt++;
+				count++;
 			}
-			if (countt == philo->nbr)
+			if (count == philo->nbr)
 				philo->all_alive = 0;
 		}	
 	}
@@ -150,6 +150,7 @@ int	parse_argv(int argc, char **argv, t_philo *philo)
 		return (printf(ERR_USAGE_2));
 	if (philo->nbr == 1)
 		return (printf(ERR_COUNT_1));
+		
 	return (0);
 }
 
@@ -195,8 +196,11 @@ int main (int argc, char **argv)
 	
 	if (argc < 5 || argc > 6)
 		return (printf(ERR_USAGE));
+	
 	if (parse_argv(argc, argv, &philo))
 		return (1);
+	if (check_argv(argv) == 0)
+		return (0);
 	if (init_mutex(&philo))
 		return (1);
 	if (init_philosophers(&philo))

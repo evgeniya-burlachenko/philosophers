@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/08 22:43:39 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/08 23:47:03 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n"
 # define ERR_COUNT_1	RED"The philosopher can't eat with one fork. He died.\n"
 # define ERR_MALLOC		RED"Error: memory not allocated"
 # define ERR_USAGE_2	RED"Error: Wrong arguments\n"
+# define ERR_SYMBOL		YELLOW "Cannot use this symbol\n"
 
 
 # include <unistd.h>
@@ -62,4 +63,5 @@ long	get_time(void);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 void	free_all(t_philo *philo, t_one *one);
+int	check_argv(char **argv);
 #endif

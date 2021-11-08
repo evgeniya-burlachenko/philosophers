@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/08 22:43:34 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/08 23:46:17 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,26 @@ long get_time(void)
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
+
+int	check_argv(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = -1;
+	while (argv[++i])
+	{
+		j = -1;
+		while (argv[i][++j])
+		{
+			if (ft_isdigit(argv[i][j]) == 0)
+			{
+				printf(ERR_SYMBOL);
+				return (0);
+			}
+		}
+	}
+	return (1);
+}
 
