@@ -25,6 +25,8 @@ This project has a goal to get knowledge about multhithreding and multiprocessin
 
 # Source
 
-* https://youtu.be/6j4lwImwyT8
-* https://youtu.be/2sv8LB0_uKg
-* https://learnc.info/c/pthreads_deadlock.html
+* https://youtu.be/6j4lwImwyT8 - Лекция по проекту Philosofers (school 21) ч.1
+* https://youtu.be/2sv8LB0_uKg - Лекция по проекту Philosofers (school 21) ч.2
+* https://learnc.info/c/pthreads_mutex_introduction.html - Введение в мьютексы
+* https://learnc.info/c/pthreads_deadlock.html - Deadlock
+* https://learnc.info/c/pthreads_semaphores.html - Семафоры
