@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/08 23:46:17 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/09 14:12:51 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(*str))
 	{
 		num = num * 10 + (int)*str - '0';
-		if (num > 2147483647 && sign == 1)
-			return (-1);
-		if (num > 2147483648 && sign == -1)
-			return (0);
 		str++;
 	}
 	return (num * sign);
@@ -75,3 +71,19 @@ int	check_argv(char **argv)
 	return (1);
 }
 
+void	print_activity(int id, t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->print);
+	if (philo->all_alive)
+		printf("%ld %d %s\n", get_time() - philo->start_time, id + 1, str);
+	pthread_mutex_unlock(&philo->print);
+}
+
+void	print_death(int id, t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->print);
+	if (philo->all_alive)
+		printf(RED"%ld %d %s\n", get_time() - philo->start_time, id + 1, str);
+	philo->all_alive = 0;
+	pthread_mutex_unlock(&philo->print);
+}

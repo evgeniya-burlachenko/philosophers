@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/08 23:47:03 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/09 19:49:18 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n"
 typedef	struct 			s_one
 {
 	int					id;
-	int					count;
-	long				last_meal;
+	int					count;//кол-во приемов пищи
+	long				time_last_meal;//time last meal
+	
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
-	pthread_t			thread;
+	
+	pthread_t			tid;
 	struct s_philo		*philo;
 	
 }						t_one;
@@ -46,22 +48,37 @@ typedef	struct 			s_one
 typedef	struct 			s_philo
 {
 	int					nbr;
+	
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleap;
 	int					count_eat;
-	int					all_alive;
+	
+	int					all_alive; //flag
 	long				start_time;
+	
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		eat;
 	pthread_mutex_t		print;
+	
 	t_one				*one;
 }						t_philo;
 
+int 	init_philosophers(t_philo	*philo);
+int		init_mutex(t_philo	*philo);
+int		parse_argv(int argc, char **argv, t_philo *philo);
+void 	free_all(t_philo *philo, t_one *one);
 
 long	get_time(void);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
-void	free_all(t_philo *philo, t_one *one);
-int	check_argv(char **argv);
+int		check_argv(char **argv);
+void	print_activity(int id, t_philo *philo, char *str);
+void	print_death(int id, t_philo *philo, char *str);
+
+
+
+
+
+
 #endif
