@@ -31,3 +31,4 @@ This project has a goal to get knowledge about multhithreding and multiprocessin
 * https://learnc.info/c/pthreads_deadlock.html - Deadlock
 * https://learnc.info/c/pthreads_semaphores.html - Семафоры
 * https://learnc.info/c/pthreads_create_and_join.html - Создание и ожидание выполнения потоков
+* https://nafuka11.github.io/philosophers-visualizer/ - визуализатор
