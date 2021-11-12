@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:28:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 20:04:39 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 22:24:27 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,18 @@ int	init_philosophers(t_philo *philo)
 	return (0);
 }
 
-void	free_all(t_philo *philo, t_one *one)
+void	check_count_eat(t_philo *philo, t_one *one)
 {
 	int	i;
+	int	count;
 
 	i = -1;
+	count = 0;
 	while (++i < philo->nbr)
-		pthread_join(one[i].tid, NULL);
-	i = -1;
-	while (++i < philo->nbr)
-		pthread_mutex_destroy(&philo->forks[i]);
-	pthread_mutex_destroy(&philo->eat);
-	free(philo->forks);
-	free(philo->one);
+	{
+		if (one[i].count >= philo->count_eat)
+			count++;
+	}
+	if (count == philo->nbr)
+		philo->all_alive = 0;
 }
