@@ -6,11 +6,11 @@
 #    By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/12 12:15:49 by skelly            #+#    #+#              #
-#    Updated: 2021/11/12 13:16:01 by skelly           ###   ########.fr        #
+#    Updated: 2021/11/12 14:24:25 by skelly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	philo_bonus
+NAME			=	philo
 
 HEADER			=	philo.h
 

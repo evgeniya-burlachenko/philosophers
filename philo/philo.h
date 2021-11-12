@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/11 16:11:25 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:37:57 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define YELLOW			"\033[1;33m"
 # define RED			"\033[1;31m"
+# define GREEN			"\033[1;32m"
 # define ERR_USAGE		 "Error usage: ./philo number_of_philosophers \
 time_to_die \
 time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n"

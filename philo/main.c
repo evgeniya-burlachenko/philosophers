@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 12:22:05 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 16:25:33 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	eat(t_one	*one)
 		one->id + 1, "is eating");
 	one->time_last_meal = get_time() - philo->start_time;
 	pthread_mutex_unlock(&philo->eat);
-	usleep(philo->time_to_eat * 900);
+	usleep(philo->time_to_eat * 1000);
 	one->count += 1;
 	pthread_mutex_unlock(one->left_fork);
 	pthread_mutex_unlock(one->right_fork);
@@ -69,13 +69,15 @@ void	stop_sim(t_philo *philo, t_one *one)
 			pthread_mutex_lock(&philo->eat);
 			if (get_time() - philo->start_time - one[i].time_last_meal
 				> philo->time_to_die)
+			
 			{
 				if (philo->all_alive)
 					printf(RED"%ld %d %s\n", get_time() - philo->start_time,
 						one->id + 1, "died");
-				philo->all_alive = 0;
+				philo->all_alive = 0;	
 			}
 			pthread_mutex_unlock(&philo->eat);
+		
 			usleep(100);
 		}
 		if (philo->count_eat != -1 && philo->all_alive)
@@ -98,6 +100,8 @@ int	simulate(t_philo *philo)
 	}
 	stop_sim(philo, philo->one);
 	free_all(philo, philo->one);
+	if (philo->count_eat != -1 )
+		printf(GREEN"philosophers have eaten at least %d times\n", philo->count_eat);
 	return (0);
 }
 

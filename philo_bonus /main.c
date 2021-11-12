@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 12:44:56 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 18:24:03 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	eat(t_one	*one)
 	t_philo	*philo;
 
 	philo = one->philo;
-	sem_wait(one->philo->forks);
+	sem_wait(philo->forks);
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "has taken a fork");
-	sem_wait(one->philo->forks);
+	sem_wait(philo->forks);
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "has taken a fork");
 	sem_wait(philo->eat);
@@ -30,8 +30,8 @@ void	eat(t_one	*one)
 	sem_post(philo->eat);
 	usleep(philo->time_to_eat * 900);
 	one->count += 1;
-	sem_post(one->philo->forks);
-	sem_post(one->philo->forks);
+	sem_post(philo->forks);
+	sem_post(philo->forks);
 }
 
 void	*start_sim(void	*one_phil)
@@ -74,10 +74,12 @@ void	stop_sim(t_philo *philo, t_one *one)
 					printf(RED"%ld %d %s\n", get_time() - philo->start_time,
 						one->id + 1, "died");
 				philo->all_alive = 0;
+				exit(1);
 			}
 			sem_post(philo->eat);
 			usleep(100);
 		}
+
 		if (philo->count_eat != -1 && philo->all_alive)
 			check_count_eat(philo, one);
 	}

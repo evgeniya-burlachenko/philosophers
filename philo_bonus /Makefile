@@ -6,7 +6,7 @@
 #    By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/12 12:15:49 by skelly            #+#    #+#              #
-#    Updated: 2021/11/12 13:19:45 by skelly           ###   ########.fr        #
+#    Updated: 2021/11/12 17:59:42 by skelly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS			=	init.c \
 OBJS			=	$(patsubst %.c, %.o, $(SRCS))
 
 
-CFLAGS			=	-Wall -Wextra -Werror -pthread 
+CFLAGS			=	-Wall -Wextra -Werror -pthread -fsanitize=address -g
 CC 				=	gcc
 
 RM				=	rm -f
