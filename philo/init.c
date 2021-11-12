@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:28:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/09 19:51:44 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/11 16:10:52 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,37 @@ int	parse_argv(int argc, char **argv, t_philo *philo)
 		philo->count_eat = -1;
 	if (philo->nbr < 1 || philo->time_to_sleap < 0 || philo->time_to_eat < 0
 		|| philo->time_to_sleap < 0 || (argc == 6 && philo->count_eat <= 0))
-		return (printf(ERR_USAGE_2));
+		return (printf(YELLOW ERR_USAGE_2));
 	if (philo->nbr == 1)
-		return (printf(ERR_COUNT_1));
+		return (printf(YELLOW ERR_COUNT_1));
 	return (0);
 }
 
 int	init_mutex(t_philo	*philo)
 {
 	int	i;
-	if (!(philo->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * philo->nbr)))
-		return (printf(ERR_MALLOC));
+
+	philo->forks = malloc(sizeof(pthread_mutex_t) * philo->nbr);
+	if (!(philo->forks))
+		return (printf(RED ERR_MALLOC));
 	i = -1;
 	while (++i < philo->nbr)
-		pthread_mutex_init(&philo->forks[i], NULL);
-	pthread_mutex_init(&philo->eat, NULL);
-	pthread_mutex_init(&philo->print, NULL);
+	{
+		if (pthread_mutex_init(&philo->forks[i], NULL))
+			return (printf(RED ERR_MUTEX));
+	}
+	if (pthread_mutex_init(&philo->eat, NULL))
+		return (printf(RED ERR_MUTEX));
 	return (0);
 }
 
-int init_philosophers(t_philo	*philo)
+int	init_philosophers(t_philo *philo)
 {
 	int	i;
-	
-	if(!(philo->one = malloc(sizeof(t_one) * philo->nbr)))
-		return (printf(ERR_MALLOC));
+
+	philo->one = malloc(sizeof(t_one) * philo->nbr);
+	if (!(philo->one))
+		return (printf(RED ERR_MALLOC));
 	i = -1;
 	while (++i < philo->nbr)
 	{
@@ -61,16 +67,15 @@ int init_philosophers(t_philo	*philo)
 		if (i < philo->nbr - 1)
 			philo->one[i].right_fork = &philo->forks[i + 1];
 		else
-			philo->one[i].right_fork= &philo->forks[0];
+			philo->one[i].right_fork = &philo->forks[0];
 	}
 	return (0);
 }
 
-
-void free_all(t_philo *philo, t_one *one)
+void	free_all(t_philo *philo, t_one *one)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (++i < philo->nbr)
 		pthread_join(one[i].tid, NULL);
@@ -78,7 +83,6 @@ void free_all(t_philo *philo, t_one *one)
 	while (++i < philo->nbr)
 		pthread_mutex_destroy(&philo->forks[i]);
 	pthread_mutex_destroy(&philo->eat);
-	pthread_mutex_destroy(&philo->print);
 	free(philo->forks);
 	free(philo->one);
 }

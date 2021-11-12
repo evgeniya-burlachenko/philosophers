@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/09 14:12:51 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/11 15:08:18 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-long get_time(void)
+long	get_time(void)
 {
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
-
 
 int	check_argv(char **argv)
 {
@@ -71,19 +70,18 @@ int	check_argv(char **argv)
 	return (1);
 }
 
-void	print_activity(int id, t_philo *philo, char *str)
+void	check_count_eat(t_philo *philo, t_one *one)
 {
-	pthread_mutex_lock(&philo->print);
-	if (philo->all_alive)
-		printf("%ld %d %s\n", get_time() - philo->start_time, id + 1, str);
-	pthread_mutex_unlock(&philo->print);
-}
+	int	i;
+	int	count;
 
-void	print_death(int id, t_philo *philo, char *str)
-{
-	pthread_mutex_lock(&philo->print);
-	if (philo->all_alive)
-		printf(RED"%ld %d %s\n", get_time() - philo->start_time, id + 1, str);
-	philo->all_alive = 0;
-	pthread_mutex_unlock(&philo->print);
+	i = -1;
+	count = 0;
+	while (++i < philo->nbr)
+	{
+		if (one[i].count >= philo->count_eat)
+			count++;
+	}
+	if (count == philo->nbr)
+		philo->all_alive = 0;
 }
