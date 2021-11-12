@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 11:06:26 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 12:43:54 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_philo
 int						init_philosophers(t_philo	*philo);
 int						init_mutex(t_philo	*philo);
 int						parse_argv(int argc, char **argv, t_philo *philo);
-void					free_all(t_philo *philo, t_one *one);
+void					free_all(t_philo *philo);
 long					get_time(void);
 int						ft_atoi(const char *str);
 int						ft_isdigit(int c);

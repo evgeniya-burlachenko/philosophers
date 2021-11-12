@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:28:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 11:20:38 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 12:43:04 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	parse_argv(int argc, char **argv, t_philo *philo)
 
 int	init_mutex(t_philo	*philo)
 {
-	int	i;
-
 	sem_unlink("/philo_forks");
 	sem_unlink("/philo_eat");
 	philo->forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, philo->nbr);
@@ -60,7 +58,7 @@ int	init_philosophers(t_philo *philo)
 	return (0);
 }
 
-void	free_all(t_philo *philo, t_one *one)
+void	free_all(t_philo *philo)
 {	
 	int	i;
 	int	j;

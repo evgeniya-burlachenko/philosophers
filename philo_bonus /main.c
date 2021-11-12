@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 11:19:16 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 12:44:56 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	*start_sim(void	*one_phil)
 void	stop_sim(t_philo *philo, t_one *one)
 {
 	int	i;
-	int	count;
 
 	while (philo->all_alive)
 	{
@@ -88,7 +87,6 @@ int	simulate(t_philo *philo)
 {
 	int		i;
 	t_one	*one;
-	int		count;
 
 	i = -1;
 	one = philo->one;
@@ -99,7 +97,7 @@ int	simulate(t_philo *philo)
 			return (printf(ERR_MUTEX_2));
 	}
 	stop_sim(philo, philo->one);
-	free_all(philo, philo->one);
+	free_all(philo);
 	return (0);
 }
 
@@ -108,7 +106,7 @@ int	main(int argc, char **argv)
 	t_philo		philo;
 
 	if (argc < 5 || argc > 6)
-		return (printf(ERR_USAGE));
+		return (printf(YELLOW ERR_USAGE));
 	if (parse_argv(argc, argv, &philo))
 		return (1);
 	if (!(check_argv(argv)))
