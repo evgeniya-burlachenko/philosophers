@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 15:37:57 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 20:50:56 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ int						ft_atoi(const char *str);
 int						ft_isdigit(int c);
 int						check_argv(char **argv);
 void					check_count_eat(t_philo *philo, t_one *one);
-
+void					ft_usleep(int ms);
 #endif

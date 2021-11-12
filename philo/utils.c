@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 16:19:47 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 20:50:31 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,14 @@ void	check_count_eat(t_philo *philo, t_one *one)
 	}
 	if (count == philo->nbr)
 		philo->all_alive = 0;
+}
+
+void	ft_usleep(int ms)
+{
+	long	time;
+	
+	time = get_time();
+	usleep(ms * 920);
+	while (get_time() < time + ms)
+		usleep(ms * 3);
 }

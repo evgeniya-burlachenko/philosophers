@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 16:25:33 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 22:03:58 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	eat(t_one	*one)
 
 	philo = one->philo;
 	pthread_mutex_lock(one->left_fork);
+	if (philo->all_alive)
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "has taken a fork");
 	pthread_mutex_lock(one->right_fork);
+	if (philo->all_alive)
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "has taken a fork");
 	pthread_mutex_lock(&philo->eat);
+	if (philo->all_alive)
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "is eating");
 	one->time_last_meal = get_time() - philo->start_time;
@@ -42,14 +45,14 @@ void	*start_sim(void	*one_phil)
 	one = (t_one *)one_phil;
 	philo = one->philo;
 	if (one->id % 2)
-		usleep(20000);
+		ft_usleep(philo->time_to_sleap/2);
 	while (philo->all_alive)
 	{
 		eat(one);
 		if (philo->all_alive)
 			printf("%ld %d %s\n", get_time() - philo->start_time,
 				one->id + 1, "is sleeping");
-		usleep(philo->time_to_sleap * 1000);
+		ft_usleep(philo->time_to_sleap );
 		if (philo->all_alive)
 			printf("%ld %d %s\n", get_time() - philo->start_time,
 				one->id + 1, "is thinking");
@@ -69,7 +72,6 @@ void	stop_sim(t_philo *philo, t_one *one)
 			pthread_mutex_lock(&philo->eat);
 			if (get_time() - philo->start_time - one[i].time_last_meal
 				> philo->time_to_die)
-			
 			{
 				if (philo->all_alive)
 					printf(RED"%ld %d %s\n", get_time() - philo->start_time,
@@ -77,7 +79,6 @@ void	stop_sim(t_philo *philo, t_one *one)
 				philo->all_alive = 0;	
 			}
 			pthread_mutex_unlock(&philo->eat);
-		
 			usleep(100);
 		}
 		if (philo->count_eat != -1 && philo->all_alive)

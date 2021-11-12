@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 18:24:03 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 19:45:32 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	eat(t_one	*one)
 
 	philo = one->philo;
 	sem_wait(philo->forks);
-	printf("%ld %d %s\n", get_time() - philo->start_time,
+	if (philo->all_alive)
+		printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "has taken a fork");
 	sem_wait(philo->forks);
+	if (philo->all_alive)
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "has taken a fork");
 	sem_wait(philo->eat);
+	if (philo->all_alive)
 	printf("%ld %d %s\n", get_time() - philo->start_time,
 		one->id + 1, "is eating");
 	one->time_last_meal = get_time() - philo->start_time;
