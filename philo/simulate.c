@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:20:16 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 04:47:15 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 04:56:03 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	eat(t_one	*one)
 			one->id + 1, "is eating");
 	one->time_last_meal = get_time() - philo->start_time;
 	pthread_mutex_unlock(&philo->eat);
-	usleep(philo->time_to_eat * 1000);
+	ft_usleep(philo->time_to_eat);
 	one->count += 1;
 	pthread_mutex_unlock(one->left_fork);
 	pthread_mutex_unlock(one->right_fork);
@@ -90,8 +90,6 @@ int	simulate(t_philo *philo)
 {
 	int		i;
 	t_one	*one;
-	// pthread_t		t1;
-
 
 	i = -1;
 	one = philo->one;

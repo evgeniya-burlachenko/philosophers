@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:28:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 00:50:35 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 04:55:20 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ int	parse_argv(int argc, char **argv, t_philo *philo)
 	if (philo->nbr < 1 || philo->time_to_sleap < 0 || philo->time_to_eat < 0
 		|| philo->time_to_sleap < 0 || (argc == 6 && philo->count_eat <= 0))
 		return (printf(YELLOW ERR_USAGE_2));
-	// if (philo->nbr == 1)
-	// {
-	// 	printf(RED"%ld %d %s\n", get_time() - philo->start_time,
-	// 					philo->one->id + 1, "died");
-	// 		philo->all_alive = 0;
-	// 		stop_sim(philo, philo->one);
-	// free_all(philo, philo->one);
-	// }
-	
-		//return (printf(YELLOW ERR_COUNT_1));
 	return (0);
 }
 
