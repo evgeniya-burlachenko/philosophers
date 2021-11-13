@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:20:16 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 04:56:03 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 05:02:04 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	simulate(t_philo *philo)
 	{
 		if (pthread_create(&one[i].tid, NULL, start_sim, &one[i]))
 			return (printf(ERR_MUTEX_2));
-			pthread_detach(one[i].tid);
+		pthread_detach(one[i].tid);
 	}
 	stop_sim(philo, philo->one);
 	free_all(philo, philo->one);

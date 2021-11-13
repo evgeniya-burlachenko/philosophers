@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 00:42:18 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 05:03:26 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-long	get_time(void)
-{
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	return (now.tv_sec * 1000 + now.tv_usec / 1000);
-}
-
 int	check_argv(char **argv)
 {
 	int	i;
@@ -69,6 +61,7 @@ int	check_argv(char **argv)
 	}
 	return (1);
 }
+
 int	check_argv_2(t_philo *philo)
 {
 	if (philo->nbr > 200)

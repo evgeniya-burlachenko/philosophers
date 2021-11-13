@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 00:58:53 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 05:03:50 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int						parse_argv(int argc, char **argv, t_philo *philo);
 int						init_mutex(t_philo	*philo);
 int						init_philosophers(t_philo	*philo);
 void					check_count_eat(t_philo *philo, t_one *one);
+long					get_time(void);
 //utils
 int						ft_isdigit(int c);
 int						ft_atoi(const char *str);
-long					get_time(void);
 int						check_argv(char **argv);
 void					ft_usleep(int ms);
 int						check_argv_2(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:28:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 04:55:20 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 05:03:32 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,12 @@ void	check_count_eat(t_philo *philo, t_one *one)
 	}
 	if (count == philo->nbr)
 		philo->all_alive = 0;
+}
+
+long	get_time(void)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
