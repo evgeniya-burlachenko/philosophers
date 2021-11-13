@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 22:33:21 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 00:42:18 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,19 @@ int	check_argv(char **argv)
 		}
 	}
 	return (1);
+}
+int	check_argv_2(t_philo *philo)
+{
+	if (philo->nbr > 200)
+		printf(YELLOW ERR_USAGE_2);
+	else if (philo->time_to_die < 60 || philo->time_to_eat < 60
+		|| philo->time_to_sleap < 60)
+	{
+		printf(YELLOW ERR_USAGE_2);
+	}
+	else
+		return (1);
+	return (0);
 }
 
 void	ft_usleep(int ms)

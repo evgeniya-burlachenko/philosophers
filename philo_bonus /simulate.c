@@ -5,36 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 22:20:16 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 04:47:15 by skelly           ###   ########.fr       */
+/*   Created: 2021/11/12 22:46:32 by skelly            #+#    #+#             */
+/*   Updated: 2021/11/12 23:02:41 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	free_all(t_philo *philo)
+{	
+	int	i;
+	int	j;
+	int	f;
+
+	i = -1;
+	while (++i < philo->nbr)
+	{
+		waitpid(-1, &f, 0);
+		if (f != 0)
+		{
+			j = -1;
+			while (++j < philo->nbr)
+				kill(philo->one[j].id, 15);
+			break ;
+		}
+	}
+	sem_close(philo->eat);
+	sem_close(philo->forks);
+	sem_unlink("/philo_eat");
+	sem_unlink("/philo_forks");
+	free(philo->one);
+}
 
 void	eat(t_one	*one)
 {
 	t_philo	*philo;
 
 	philo = one->philo;
-	pthread_mutex_lock(one->left_fork);
+	sem_wait(philo->forks);
 	if (philo->all_alive)
 		printf("%ld %d %s\n", get_time() - philo->start_time,
 			one->id + 1, "has taken a fork");
-	pthread_mutex_lock(one->right_fork);
+	sem_wait(philo->forks);
 	if (philo->all_alive)
 		printf("%ld %d %s\n", get_time() - philo->start_time,
 			one->id + 1, "has taken a fork");
-	pthread_mutex_lock(&philo->eat);
+	sem_wait(philo->eat);
 	if (philo->all_alive)
 		printf("%ld %d %s\n", get_time() - philo->start_time,
 			one->id + 1, "is eating");
 	one->time_last_meal = get_time() - philo->start_time;
-	pthread_mutex_unlock(&philo->eat);
-	usleep(philo->time_to_eat * 1000);
+	sem_post(philo->eat);
+	usleep(philo->time_to_eat * 900);
 	one->count += 1;
-	pthread_mutex_unlock(one->left_fork);
-	pthread_mutex_unlock(one->right_fork);
+	sem_post(philo->forks);
+	sem_post(philo->forks);
 }
 
 void	*start_sim(void	*one_phil)
@@ -57,7 +82,7 @@ void	*start_sim(void	*one_phil)
 			printf("%ld %d %s\n", get_time() - philo->start_time,
 				one->id + 1, "is thinking");
 	}
-	return (0);
+	exit (0);
 }
 
 void	stop_sim(t_philo *philo, t_one *one)
@@ -69,7 +94,7 @@ void	stop_sim(t_philo *philo, t_one *one)
 		i = -1;
 		while (++i < philo->nbr && philo->all_alive)
 		{
-			pthread_mutex_lock(&philo->eat);
+			sem_wait(philo->eat);
 			if (get_time() - philo->start_time - one[i].time_last_meal
 				> philo->time_to_die)
 			{
@@ -77,10 +102,12 @@ void	stop_sim(t_philo *philo, t_one *one)
 					printf(RED"%ld %d %s\n", get_time() - philo->start_time,
 						one->id + 1, "died");
 				philo->all_alive = 0;
+				exit(1);
 			}
-			pthread_mutex_unlock(&philo->eat);
+			sem_post(philo->eat);
 			usleep(100);
 		}
+
 		if (philo->count_eat != -1 && philo->all_alive)
 			check_count_eat(philo, one);
 	}
@@ -90,8 +117,6 @@ int	simulate(t_philo *philo)
 {
 	int		i;
 	t_one	*one;
-	// pthread_t		t1;
-
 
 	i = -1;
 	one = philo->one;
@@ -100,12 +125,8 @@ int	simulate(t_philo *philo)
 	{
 		if (pthread_create(&one[i].tid, NULL, start_sim, &one[i]))
 			return (printf(ERR_MUTEX_2));
-			pthread_detach(one[i].tid);
 	}
 	stop_sim(philo, philo->one);
-	free_all(philo, philo->one);
-	if (philo->count_eat != -1 )
-		printf(GREEN"philosophers have eaten at least %d times\n",
-			philo->count_eat);
+	free_all(philo);
 	return (0);
 }

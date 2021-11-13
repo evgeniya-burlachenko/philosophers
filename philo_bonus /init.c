@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:28:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 12:43:04 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 22:59:00 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,18 @@ int	init_philosophers(t_philo *philo)
 	return (0);
 }
 
-void	free_all(t_philo *philo)
-{	
+void	check_count_eat(t_philo *philo, t_one *one)
+{
 	int	i;
-	int	j;
-	int	f;
+	int	count;
 
 	i = -1;
+	count = 0;
 	while (++i < philo->nbr)
 	{
-		waitpid(-1, &f, 0);
-		if (f != 0)
-		{
-			j = -1;
-			while (++j < philo->nbr)
-				kill(philo->one[j].id, 15);
-			break ;
-		}
+		if (one[i].count >= philo->count_eat)
+			count++;
 	}
-	sem_close(philo->eat);
-	sem_close(philo->forks);
-	sem_unlink("/philo_eat");
-	sem_unlink("/philo_forks");
-	free(philo->one);
+	if (count == philo->nbr)
+		philo->all_alive = 0;
 }

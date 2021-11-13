@@ -6,11 +6,26 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 22:32:56 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 00:44:42 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	free_all(t_philo *philo, t_one *one)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo->nbr)
+		pthread_join(one[i].tid, NULL);
+	i = -1;
+	while (++i < philo->nbr)
+		pthread_mutex_destroy(&philo->forks[i]);
+	pthread_mutex_destroy(&philo->eat);
+	free(philo->forks);
+	free(philo->one);
+}
 
 int	main(int argc, char **argv)
 {
@@ -21,6 +36,8 @@ int	main(int argc, char **argv)
 	if (parse_argv(argc, argv, &philo))
 		return (1);
 	if (!(check_argv(argv)))
+		return (0);
+	if (!(check_argv_2(&philo)))
 		return (0);
 	if (init_mutex(&philo))
 		return (1);

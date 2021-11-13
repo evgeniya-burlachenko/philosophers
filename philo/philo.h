@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 22:31:28 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 00:58:53 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int						ft_atoi(const char *str);
 long					get_time(void);
 int						check_argv(char **argv);
 void					ft_usleep(int ms);
+int						check_argv_2(t_philo *philo);
 //simulate
 void					free_all(t_philo *philo, t_one *one);
 void					eat(t_one	*one);

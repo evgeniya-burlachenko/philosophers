@@ -6,7 +6,7 @@
 /*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:41:48 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 18:04:07 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/12 22:58:26 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,12 @@ int	check_argv(char **argv)
 	return (1);
 }
 
-void	check_count_eat(t_philo *philo, t_one *one)
+void	ft_usleep(int ms)
 {
-	int	i;
-	int	count;
+	long	time;
 
-	i = -1;
-	count = 0;
-	while (++i < philo->nbr)
-	{
-		if (one[i].count >= philo->count_eat)
-			count++;
-	}
-	if (count == philo->nbr)
-		philo->all_alive = 0;
+	time = get_time();
+	usleep(ms * 920);
+	while (get_time() < time + ms)
+		usleep(ms * 3);
 }

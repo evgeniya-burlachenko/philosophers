@@ -6,7 +6,7 @@
 #    By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/12 12:15:49 by skelly            #+#    #+#              #
-#    Updated: 2021/11/12 17:59:42 by skelly           ###   ########.fr        #
+#    Updated: 2021/11/12 22:59:28 by skelly           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ HEADER			=	philo.h
 
 SRCS			=	init.c \
 					main.c \
-					utils.c 
+					utils.c \
+					simulate.c
 				
 OBJS			=	$(patsubst %.c, %.o, $(SRCS))
 
