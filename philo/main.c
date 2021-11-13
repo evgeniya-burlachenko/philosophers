@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: skelly <skelly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 13:42:06 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 00:44:42 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 16:58:47 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	free_all(t_philo *philo, t_one *one)
 	int	i;
 
 	i = -1;
+	(void)one;
 	while (++i < philo->nbr)
 		pthread_join(one[i].tid, NULL);
 	i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: skelly <skelly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 22:46:32 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/13 05:06:36 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 20:22:38 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	free_all(t_philo *philo)
 		{
 			j = -1;
 			while (++j < philo->nbr)
-				kill(philo->one[j].id, 15);
+			{
+				printf("hi\n");
+				kill(philo->one[j].tid, 15);
+			}
+				
 			break ;
 		}
 	}
@@ -123,11 +127,13 @@ int	simulate(t_philo *philo)
 	philo->start_time = get_time();
 	while (++i < philo->nbr)
 	{
-		if (pthread_create(&one[i].tid, NULL, start_sim, &one[i]))
-			return (printf(ERR_MUTEX_2));
-		pthread_detach(one[i].tid);
+		// if (pthread_create(&one[i].tid, NULL, start_sim, &one[i]))
+		// 	return (printf(ERR_MUTEX_2));
+		// pthread_detach(one[i].tid);
+		
 	}
 	stop_sim(philo, philo->one);
 	free_all(philo);
+	printf("hi\n");
 	return (0);
 }

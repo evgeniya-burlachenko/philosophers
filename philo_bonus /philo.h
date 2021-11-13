@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skelly <skelly@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: skelly <skelly@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:20:35 by skelly            #+#    #+#             */
-/*   Updated: 2021/11/12 22:53:32 by skelly           ###   ########.fr       */
+/*   Updated: 2021/11/13 20:26:06 by skelly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ typedef struct s_one
 	int					id;
 	int					count;
 	long				time_last_meal;
-	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*right_fork;
-	pthread_t			tid;
+	pid_t				tid;
 	struct s_philo		*philo;
 }						t_one;
 typedef struct s_philo
